@@ -1,0 +1,54 @@
+{
+  "EventType": "s3:ObjectCreated:Put", 
+  "Key": "images/ant2.jpg", 
+  "Records": [
+    {
+      "awsRegion": "", 
+      "eventName": "s3:ObjectCreated:Put", 
+      "eventSource": "minio:s3", 
+      "eventTime": "2018-03-02T18:05:38Z", 
+      "eventVersion": "2.0", 
+      "requestParameters": {
+        "sourceIPAddress": "172.17.0.1:42002"
+      }, 
+      "responseElements": {
+        "x-amz-request-id": "15182C9FA54DA147", 
+        "x-minio-origin-endpoint": "http://127.0.0.1:9000"
+      }, 
+      "s3": {
+        "bucket": {
+          "arn": "arn:aws:s3:::images", 
+          "name": "images", 
+          "ownerIdentity": {
+            "principalId": "4CU2YXB8M42FPXHF1C2D"
+          }
+        }, 
+        "configurationId": "Config", 
+        "object": {
+          "contentType": "image/jpeg", 
+          "eTag": "4c12dea0d6f201d2d5e3e0bc01b088db", 
+          "key": "ant2.jpg", 
+          "sequencer": "15182C9FA54DA147", 
+          "size": 40830, 
+          "userMetadata": {
+            "X-Amz-Meta-Com.apple.quarantine": "0083;55a3aebb;Safari;", 
+            "content-type": "image/jpeg"
+          }, 
+          "versionId": "1"
+        }, 
+        "s3SchemaVersion": "1.0"
+      }, 
+      "source": {
+        "host": "172.17.0.1", 
+        "port": "42002", 
+        "userAgent": "Minio (darwin; amd64) minio-go/4.0.7 mc/2018-02-09T23:07:36Z"
+      }, 
+      "userIdentity": {
+        "principalId": "4CU2YXB8M42FPXHF1C2D"
+      }
+    }
+  ], 
+  "level": "info", 
+  "msg": "", 
+  "time": "2018-03-02T18:05:38Z"
+}

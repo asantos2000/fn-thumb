@@ -1,0 +1,7 @@
+name: adsantos/fn-thumb
+version: 0.0.8
+runtime: node
+entrypoint: node func.js
+build_image: adsantos/node-py
+run_image: adsantos/node-py
+type: async
