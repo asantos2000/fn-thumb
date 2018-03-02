@@ -1,4 +1,4 @@
-# fn-thumb
+# fn-thumb function
 
 A thumbnail generator example using [FnProject](http://fnproject.io/) and [Minio's](http://docs.minio.io/docs/javascript-client-api-reference) javascript API. This is a simple example of how build an AWS Lambda like function.
 
