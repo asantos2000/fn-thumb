@@ -1,6 +1,6 @@
 # fn-thumb
 
-A thumbnail generator example using [FnProject](http://fnproject.io/) and Minio's javascript API [Minio](http://docs.minio.io/docs/javascript-client-api-reference). This is a simple example of how one can build a AWS Lambda like functionality.
+A thumbnail generator example using [FnProject](http://fnproject.io/) and [Minio's](http://docs.minio.io/docs/javascript-client-api-reference) javascript API. This is a simple example of how one can build a AWS Lambda like functionality.
 
 ![](res/image003.png)
 
@@ -17,7 +17,7 @@ The image provide by FnProject doesn't have all required dependencies for its in
 
 You can build your own image cloning one of official images from <https://github.com/fnproject/dockers>.
 
-For this example the image was created from <http://todo>:
+For this example the image was created from <https://github.com/asantos2000/fn-thumb/tree/master/node-py>:
 
 **Dockerfile**
 
@@ -290,7 +290,7 @@ $ docker run --rm -it --link fnserver:api -p 4000:4000 -e "FN_API_URL=http://api
 
 ## Building function
 
-Clone the source from <http://todo>
+Clone the source from <https://github.com/asantos2000/fn-thumb>
 
 ### Configuring
 
