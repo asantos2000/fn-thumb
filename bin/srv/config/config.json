@@ -87,7 +87,7 @@
 		"webhook": {
 			"1": {
 				"enable": true,
-				"endpoint": "http://thumb-srv:8080/r/myapp/fn-thumb"
+				"endpoint": "http://fn-srv:8080/r/myapp/fn-thumb"
 			}
 		},
 		"mysql": {
