@@ -180,7 +180,7 @@ Configure ```srv/config/config.json``` enabling webhook (fn route) and amqp (Rab
 		"webhook": {
 			"1": {
 				"enable": true,
-				"endpoint": "http://thumb-srv:8080/r/myapp/fn-thumb"
+				"endpoint": "http://fn-srv:8080/r/myapp/fn-thumb"
 			}
 		},
 ...		
@@ -250,8 +250,8 @@ utun0: flags=8051<UP,POINTOPOINT,RUNNING,MULTICAST> mtu 2000
 
 # Start minio-srv
 $ docker run --rm -p 9000:9000 --name minio-srv \
---add-host=thumb-srv:172.20.8.203 \
---add-host=rabbit-srv:172.20.8.203 \
+--add-host=fn-srv:172.20.8.203 \
+--link rabbit-srv \
 -v $PWD/srv/data:/data \
 -v $PWD/srv/config:/root/.minio \
 minio/minio server /data
