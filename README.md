@@ -1,6 +1,6 @@
 # fn-thumb function
 
-A thumbnail generator example using [FnProject](http://fnproject.io/) and [Minio's](http://docs.minio.io/docs/javascript-client-api-reference) javascript API. This is a simple example of how build an AWS Lambda like function.
+A thumbnail generator example using [FnProject](http://fnproject.io/) and [Minio's](http://docs.minio.io/docs/javascript-client-api-reference) javascript API. This is a simple example of how to build an AWS Lambda like function.
 
 ![](res/image003.png)
 
@@ -13,9 +13,9 @@ A thumbnail generator example using [FnProject](http://fnproject.io/) and [Minio
 
 The fn-thumb depends on npm module [sharp](https://www.npmjs.com/package/sharp).
 
-The image provide by FnProject doesn't have all required dependencies for its installation. See: <https://github.com/lovell/sharp/issues/564>
+The image provides by FnProject doesn't have all required dependencies for its installation. See: <https://github.com/lovell/sharp/issues/564>
 
-You can build your own image cloning one of official images from <https://github.com/fnproject/dockers>.
+You can build your own image cloning one of the official images from <https://github.com/fnproject/dockers>.
 
 For this example the image was created from <https://github.com/asantos2000/fn-thumb/tree/master/node-py>:
 
@@ -150,9 +150,9 @@ Access console at <http://localhost:15672>, user: guest, pwd: guest
 
 ### Minio
 
-> Note: For no reason, minio server refuse to start if any error return by webhook endpoint (fn function). The workaround is start minio server before fn server.
+> Note: I don't know why minio server refuses to start if any error occurs trying to connect at webhook endpoint (fn function). The workaround is to start minio server before fn server.
 
-> There is a similar problem with RabbitMQ, if minio server cannot obtain connection with RabbitMQ (bad user, ip, port, whatever.)
+> There is a similar problem with RabbitMQ, if minio server cannot obtain a connection with RabbitMQ (bad user, ip, port, whatever.)
 
 #### Configuring <a name="minio-configuring"></a>
 Configure ```srv/config/config.json``` enabling webhook (fn route) and amqp (RabbitMQ) events:
@@ -349,7 +349,7 @@ $ fn routes  delete myapp /fn-thumb
 
 ## Minio events configuration
 
-> Before configure the events, try few tests. See: [Testing everything](#testing-everything)
+> Before configuring the events, try few tests. See: [Testing everything](#testing-everything)
 
 Configure the minio directories and events
 
@@ -365,7 +365,7 @@ $ mc events add myminio/images-processed arn:minio:sqs::1:amqp --suffix .jpg
 
 ## Testing everything <a id="testing-everything"></a>
 
-First you need a payload (request.json file), you can get it from RabbitMQ copying an image file to the minio directory image, it'll trigger a message to RabbitMQ. See: [Rabbit Configuring Queues](#rabbit-configuring-queues).
+First, you need a payload (request.json file), you can get it from RabbitMQ copying an image file to the minio directory image, it'll trigger a message to RabbitMQ. See: [Rabbit Configuring Queues](#rabbit-configuring-queues).
 
 ```bash
 # Before configure webhook
@@ -394,7 +394,7 @@ $ mc cp ~/Pictures/*.jpg myminio/images
 ```
 
 ## Cleaning up
-You'll probablily create a lots of images, and copy a bunch of files, to clean up a little bit, try this:
+You'll probably create lots of images, and copy a bunch of files, to clean up a little bit, try this:
 
 ```bash
 # Minio

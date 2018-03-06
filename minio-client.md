@@ -23,7 +23,7 @@ $ docker run --rm -d --hostname my-rabbit -p 15672:15672 -p 5672:5672 --name rab
 
 ## Start Minio
 
-> Note: For I don't know reason, minio server refuse to start if an error occours trying to connect with amqp endpoint (RabbitMQ: bad user, ip, port, whatever).
+> Note: I don't know why, minio server refuses to start if an error occurs trying to connect with amqp endpoint (RabbitMQ: bad user, ip, port, whatever).
 
 #### Configuring <a name="minio-configuring"></a>
 Configure ```srv/config/config.json``` enabling webhook (fn route) and amqp (RabbitMQ) events:
@@ -129,10 +129,9 @@ $ mc cp ant.jpg myminio/temp
 ```
 
 ## Check RabbitMQ messages
-After configure minio notification event (See: [Minio configuration](#minio-configuring)), it'll start to receive messages like that:
- 
-![bindings](res/image006.png)
+After configuring minio notification event, it'll start to receive messages like that: 
 
+![bindings](res/image006.png)
 
 ## Start mirroring
 
@@ -159,4 +158,4 @@ Removing `myminio/temp/Curitiba_Trinario_e_densidade_77_02_2006.jpg`.
 
 ![bindings](res/image004.png)
 
-> Note: if you copy files to the folder monitored by ```mc mirror``` using OS command (ie. ```cp```), it'll automatic sync with the remote folder, but it is not true if you delete it (ie. ```rm```), you must use ```mc rm``` command to keep it in sync. The guide suggest to you aliases those OS commands.
+> Note: if you copy files to the folder monitored by ```mc mirror``` using OS command (ie. ```cp```), it'll automatically sync with the remote folder, but it is not true if you delete it (ie. ```rm```), you must use ```mc rm``` command to keep it in sync. The guide suggests to you aliases that OS commands.
