@@ -1,6 +1,6 @@
 {
   "EventType": "s3:ObjectCreated:Put", 
-  "Key": "images/ant2.jpg", 
+  "Key": "images/pexels-photo.jpg", 
   "Records": [
     {
       "awsRegion": "", 
@@ -27,7 +27,7 @@
         "object": {
           "contentType": "image/jpeg", 
           "eTag": "4c12dea0d6f201d2d5e3e0bc01b088db", 
-          "key": "ant2.jpg", 
+          "key": "pexels-photo.jpg", 
           "sequencer": "15182C9FA54DA147", 
           "size": 40830, 
           "userMetadata": {

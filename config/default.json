@@ -1,6 +1,6 @@
 {
   "config": {
-    "endPoint": "172.20.8.203",
+    "endPoint": "172.20.10.208",
     "port": 9000,
     "secure": false,
     "accessKey": "4CU2YXB8M42FPXHF1C2D",

@@ -31,7 +31,7 @@ var mc = new Minio.Client(mcConfig)
 
 // Allocate resize transformer from sharp().
 // resize to 40 pixels wide and 40 pixes in height,
-var transformer = sharp().resize(40, 40)
+var transformer = sharp().resize(100, 100)
 
 // Sharp defaults to jpeg, to use other formats use
 // sharp() documentation at http://sharp.dimens.io/en/stable/
@@ -64,6 +64,7 @@ console.log("- EventType:", eventType);
 console.log("- Bucket name:", bname);
 console.log("- File name:", oname);
 
+console.time("fn took");
 mc.getObject(bname, oname,
     function (err, dataStream) {
         if (err) {
@@ -85,3 +86,4 @@ mc.getObject(bname, oname,
             });
     }
 );
+console.timeEnd("fn took");
