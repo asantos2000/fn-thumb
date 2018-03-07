@@ -21,17 +21,20 @@ var uuidV4 = require('uuid/v4');
 var config = require('config');
 var fs = require("fs");
 
+//TODO: use consul to get config and DNS for minio server
 var mcConfig = config.get('config');
 if (mcConfig.endPoint === '<endpoint>') {
     console.log('Please configure your endpoint in \"config/webhook.json\".');
     process.exit(1);
 }
 
-var mc = new Minio.Client(mcConfig)
+console.log(mcConfig);
+
+var mc = new Minio.Client(mcConfig);
 
 // Allocate resize transformer from sharp().
 // resize to 40 pixels wide and 40 pixes in height,
-var transformer = sharp().resize(100, 100)
+var transformer = sharp().resize(100, 100);
 
 // Sharp defaults to jpeg, to use other formats use
 // sharp() documentation at http://sharp.dimens.io/en/stable/

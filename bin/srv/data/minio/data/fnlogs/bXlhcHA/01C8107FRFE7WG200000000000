@@ -1,0 +1,40 @@
+{ endPoint: 'minio',
+  port: 9000,
+  secure: false,
+  accessKey: '4CU2YXB8M42FPXHF1C2D',
+  secretKey: 'xb8XN9HbU92nrWRQc2loEP4XOBwd7UarNhf6LJlO',
+  bucket: 'images',
+  destBucket: 'images-processed',
+  prefix: '',
+  suffix: '.jpg',
+  events: [ 's3:ObjectCreated:*' ] }
+{ EventType: 's3:ObjectCreated:Put',
+  Key: 'images/pexels-photo.jpg',
+  Records: 
+   [ { awsRegion: '',
+       eventName: 's3:ObjectCreated:Put',
+       eventSource: 'minio:s3',
+       eventTime: '2018-03-02T18:05:38Z',
+       eventVersion: '2.0',
+       requestParameters: [Object],
+       responseElements: [Object],
+       s3: [Object],
+       source: [Object],
+       userIdentity: [Object] } ],
+  level: 'info',
+  msg: '',
+  time: '2018-03-02T18:05:38Z' }
+Request thumnbnail for:
+- EventType: s3:ObjectCreated:Put
+- Bucket name: images
+- File name: pexels-photo.jpg
+fn took: 24.514ms
+{ Error: getaddrinfo ENOTFOUND minio minio:9000
+    at GetAddrInfoReqWrap.onlookup [as oncomplete] (dns.js:67:26)
+  message: 'getaddrinfo ENOTFOUND minio minio:9000',
+  errno: 'ENOTFOUND',
+  code: 'ENOTFOUND',
+  syscall: 'getaddrinfo',
+  hostname: 'minio',
+  host: 'minio',
+  port: 9000 }

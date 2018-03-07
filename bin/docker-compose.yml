@@ -1,0 +1,151 @@
+version: '3'
+services:
+
+  rabbitmq:
+    image: "rabbitmq:3-management"
+    container_name: "rabbitmq"
+    hostname: "rabbitmq"
+    restart: always
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+    volumes:
+      - ./srv/data/rabbitmq:/var/lib/rabbitmq
+      - ./srv/data/rabbitmq-definitions/definitions.json:/opt/definitions.json:ro
+      - ./srv/data/rabbitmq-config/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf:ro
+
+  minio:
+    image: "minio/minio"
+    container_name: "minio"
+    hostname: "minio"
+    restart: always
+    depends_on:
+      - rabbitmq
+      - consul-server
+    volumes:
+      - ./srv/data/minio/data:/data
+      - ./srv/data/minio/config:/root/.minio 
+    ports:
+      - "9000:9000"
+    environment:
+      - MINIO_ACCESS_KEY=4CU2YXB8M42FPXHF1C2D
+      - MINIO_SECRET_KEY=xb8XN9HbU92nrWRQc2loEP4XOBwd7UarNhf6LJlO
+    command: server /data
+
+  createbuckets:
+    image: minio/mc
+    container_name: "createbuckets"
+    restart: on-failure
+    depends_on:
+      - minio
+    entrypoint: >
+      /bin/sh -c "
+      /usr/bin/mc config host add myminio http://minio:9000 4CU2YXB8M42FPXHF1C2D xb8XN9HbU92nrWRQc2loEP4XOBwd7UarNhf6LJlO;
+      /usr/bin/mc rm -r --force myminio/images;
+      /usr/bin/mc mb myminio/images;
+      /usr/bin/mc rm -r --force myminio/images-processed;
+      /usr/bin/mc mb myminio/images-processed;
+      /usr/bin/mc events add myminio/images arn:minio:sqs::1:amqp --suffix .jpg;
+      /usr/bin/mc events add myminio/images arn:minio:sqs::1:webhook --events put --suffix .jpg;
+      #exit 0;
+      "
+
+  fn:
+    image: "fnproject/functions:latest"
+    container_name: "fn"
+    hostname: "fn"
+    restart: always
+    depends_on:
+      - mq
+      - db
+      - minio
+      - consul-server
+    ports:
+      - "8080:8080"
+    environment:
+      - FN_DB_URL=mysql://root:root@tcp(db:3306)/funcs
+      - FN_MQ_URL=redis://mq:6379/
+      - FN_LOGSTORE_URL=s3://4CU2YXB8M42FPXHF1C2D:xb8XN9HbU92nrWRQc2loEP4XOBwd7UarNhf6LJlO@minio:9000/us-east-1/fnlogs
+    volumes:
+      - ./srv/data/fn:/app/data
+      - /var/run/docker.sock:/var/run/docker.sock
+
+  db:
+    image: "mysql"
+    container_name: "db"
+    hostname: "db"
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_DATABASE=funcs
+      - MYSQL_ROOT_PASSWORD=root
+    volumes:
+      - ./srv/data/mysql:/var/lib/mysql
+
+  mq:
+    image: "redis"
+    container_name: "mq"
+    hostname: "mq"
+    restart: always
+    ports:
+      - "6379:6379"
+
+  fn-ui:
+    image: "fnproject/ui"
+    container_name: "fn-ui"
+    hostname: "fn-ui"
+    restart: always
+    depends_on:
+      - fn
+    ports:
+      - "4000:4000"
+    environment:
+      - FN_API_URL=http://fn:8080
+
+  consul-server:
+    image: "consul:latest"
+    container_name: "consul"
+    hostname: "consul"
+    restart: always
+    ports:
+      - "8400:8400"
+      - "8500:8500"
+      - "8600:8600"
+    command: "agent -server -bootstrap-expect 1 -ui -disable-host-node-id -client 0.0.0.0"
+
+  grafana:
+    image: "grafana/grafana"
+    container_name: "grafana"
+    hostname: "grafana"
+    restart: always
+    ports:
+      - "3000:3000"
+    depends_on:
+      - fn
+      - prometheus
+
+  prometheus:
+    image: "prom/prometheus"
+    container_name: "prometheus"
+    hostname: "prometheus"
+    restart: always
+    depends_on:
+      - fn
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./srv/data/grafana/prometheus.yml:/etc/prometheus/prometheus.yml
+
+  portainer:
+    image: "portainer/portainer"
+    container_name: "portainer"
+    hostname: "portainer"
+    restart: always
+    depends_on:
+      - fn
+    ports:
+      - "9999:9000"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./serv/data/portainer/data:/data

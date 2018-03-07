@@ -1,0 +1,33 @@
+{ endPoint: '172.20.8.211',
+  port: 9000,
+  secure: false,
+  accessKey: '4CU2YXB8M42FPXHF1C2D',
+  secretKey: 'xb8XN9HbU92nrWRQc2loEP4XOBwd7UarNhf6LJlO',
+  bucket: 'images',
+  destBucket: 'images-processed',
+  prefix: '',
+  suffix: '.jpg',
+  events: [ 's3:ObjectCreated:*' ] }
+{ EventType: 's3:ObjectCreated:Put',
+  Key: 'images/pexels-photo.jpg',
+  Records: 
+   [ { eventVersion: '2.0',
+       eventSource: 'minio:s3',
+       awsRegion: '',
+       eventTime: '2018-03-07T19:56:35Z',
+       eventName: 's3:ObjectCreated:Put',
+       userIdentity: [Object],
+       requestParameters: [Object],
+       responseElements: [Object],
+       s3: [Object],
+       source: [Object] } ],
+  level: 'info',
+  msg: '',
+  time: '2018-03-07T19:56:35Z' }
+Request thumnbnail for:
+- EventType: s3:ObjectCreated:Put
+- Bucket name: images
+- File name: pexels-photo.jpg
+fn took: 16.704ms
+Uploading new thumbail to "images-processed"
+Successfully uploaded "pexels-photo-thumbnail.jpg" with md5sum "5c1a0d7b89fdee93980e05188f089d9d"

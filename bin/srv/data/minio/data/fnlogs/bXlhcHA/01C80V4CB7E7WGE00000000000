@@ -1,0 +1,31 @@
+{ endPoint: '172.18.0.6',
+  port: 9000,
+  secure: false,
+  accessKey: '4CU2YXB8M42FPXHF1C2D',
+  secretKey: 'xb8XN9HbU92nrWRQc2loEP4XOBwd7UarNhf6LJlO',
+  bucket: 'images',
+  destBucket: 'images-processed',
+  prefix: '',
+  suffix: '.jpg',
+  events: [ 's3:ObjectCreated:*' ] }
+{ EventType: 's3:ObjectCreated:Put',
+  Key: 'images/pexels-photo.jpg',
+  Records: 
+   [ { awsRegion: '',
+       eventName: 's3:ObjectCreated:Put',
+       eventSource: 'minio:s3',
+       eventTime: '2018-03-02T18:05:38Z',
+       eventVersion: '2.0',
+       requestParameters: [Object],
+       responseElements: [Object],
+       s3: [Object],
+       source: [Object],
+       userIdentity: [Object] } ],
+  level: 'info',
+  msg: '',
+  time: '2018-03-02T18:05:38Z' }
+Request thumnbnail for:
+- EventType: s3:ObjectCreated:Put
+- Bucket name: images
+- File name: pexels-photo.jpg
+fn took: 17.495ms

@@ -1,0 +1,51 @@
+{ endPoint: '172.20.8.211',
+  port: 9000,
+  secure: false,
+  accessKey: '4CU2YXB8M42FPXHF1C2D',
+  secretKey: 'xb8XN9HbU92nrWRQc2loEP4XOBwd7UarNhf6LJlO',
+  bucket: 'images',
+  destBucket: 'images-processed',
+  prefix: '',
+  suffix: '.jpg',
+  events: [ 's3:ObjectCreated:*' ] }
+{ EventType: 's3:ObjectCreated:Put',
+  Key: 'images/pexels-photo.jpg',
+  Records: 
+   [ { awsRegion: '',
+       eventName: 's3:ObjectCreated:Put',
+       eventSource: 'minio:s3',
+       eventTime: '2018-03-02T18:05:38Z',
+       eventVersion: '2.0',
+       requestParameters: [Object],
+       responseElements: [Object],
+       s3: [Object],
+       source: [Object],
+       userIdentity: [Object] } ],
+  level: 'info',
+  msg: '',
+  time: '2018-03-02T18:05:38Z' }
+Request thumnbnail for:
+- EventType: s3:ObjectCreated:Put
+- Bucket name: images
+- File name: pexels-photo.jpg
+fn took: 17.538ms
+{ S3Error: The specified key does not exist.
+    at Object.parseError (/function/node_modules/minio/dist/main/xml-parsers.js:56:11)
+    at /function/node_modules/minio/dist/main/transformers.js:117:22
+    at DestroyableTransform._flush (/function/node_modules/minio/dist/main/transformers.js:48:26)
+    at DestroyableTransform.<anonymous> (/function/node_modules/through2/node_modules/readable-stream/lib/_stream_transform.js:135:12)
+    at Object.onceWrapper (events.js:219:13)
+    at DestroyableTransform.emit (events.js:132:15)
+    at finishMaybe (/function/node_modules/through2/node_modules/readable-stream/lib/_stream_writable.js:371:12)
+    at endWritable (/function/node_modules/through2/node_modules/readable-stream/lib/_stream_writable.js:378:3)
+    at DestroyableTransform.Writable.end (/function/node_modules/through2/node_modules/readable-stream/lib/_stream_writable.js:356:5)
+    at IncomingMessage.onend (_stream_readable.js:602:10)
+  code: 'NoSuchKey',
+  key: '',
+  bucketname: '',
+  resource: '/images/pexels-photo.jpg',
+  requestid: '3L137',
+  hostid: '3L137',
+  amzRequestid: null,
+  amzId2: null,
+  amzBucketRegion: null }
